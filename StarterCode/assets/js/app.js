@@ -60,8 +60,7 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 function renderCircleLabels(circlesLabels, newXScale, chosenXAxis) {
     circlesLabels.transition()
         .duration(1000)
-        .attr("x", d => newXScale(d[chosenXAxis])
-            .text(d => d.abbr));
+        .attr("x", d => newXScale(d[chosenXAxis]));
 
 }
 
@@ -122,18 +121,19 @@ d3.csv("assets/data/data1.csv").then(function (stateData) {
         .append("circle")
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d.noHealthInsurance))
-        .attr("r", 10)
-        .attr("fill", "blue")
+        .attr("r", 12)
+        .attr("fill", "skyblue")
         .attr("opacity", ".7");
 
-    var circlesLabels = chartGroup.selectAll("circle")
+    var circlesLabels = chartGroup.selectAll("tspan")
         .data(stateData)
         .enter()
         .append("text")
-        .attr("cx", d => xLinearScale(d[chosenXAxis]))
-        .attr("cy", d => yLinearScale(d.noHealthInsurance))
+        .attr("x", d => xLinearScale(d[chosenXAxis]))
+        .attr("y", d => yLinearScale(d.noHealthInsurance))
         .attr("font-size", 10)
         .attr("fill", "white")
+        .attr("text-anchor", "middle")
         .text(d => d.abbr);
 
 
